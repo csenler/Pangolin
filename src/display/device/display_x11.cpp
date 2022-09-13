@@ -107,13 +107,14 @@ bool isExtensionSupported(const char *extList, const char *extension)
         GLX_ALPHA_SIZE      , 8,
         GLX_DEPTH_SIZE      , 24,
         GLX_STENCIL_SIZE    , 8,
-        GLX_DOUBLEBUFFER    , glx_doublebuffer ? True : False,
+        // GLX_DOUBLEBUFFER    , glx_doublebuffer ? True : False,
+        GLX_DOUBLEBUFFER    , glx_doublebuffer ? False : False,
         None
     };
 
     int fbcount;
-    // GLXFBConfig* fbc = glXChooseFBConfig(display, DefaultScreen(display), visual_attribs, &fbcount);
-    GLXFBConfig* fbc = glXGetFBConfigs(display, DefaultScreen(display), &fbcount);
+    GLXFBConfig* fbc = glXChooseFBConfig(display, DefaultScreen(display), visual_attribs, &fbcount);
+    // GLXFBConfig* fbc = glXGetFBConfigs(display, DefaultScreen(display), &fbcount);
     if (!fbc) {
         throw std::runtime_error("Pangolin X11: Unable to retrieve framebuffer options");
     }
